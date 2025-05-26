@@ -41,6 +41,14 @@ jobs:
       run: |
         jf docker build -t $IMAGE_NAME .
         jf docker push $IMAGE_NAME
+        jf docker scan $IMAGE_NAME --format=json > xray-result.json
+
+    - name: Xray scan result
+      uses: actions/upload-artifact@v3
+      with:
+        name: xray-result
+        path: xray-result.json
+      
           
     - name: Publish Build info With JFrog CLI
       env:

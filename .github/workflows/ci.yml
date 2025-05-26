@@ -43,9 +43,9 @@ jobs:
         jf docker build -t $IMAGE_NAME .
         jf docker tag $IMAGE_NAME $IMAGE_LATEST
         jf docker push $IMAGE_NAME
-        jf docker scan $IMAGE_NAME --format=json > scan-${{ github.run_number }}.json
+        #jf docker scan $IMAGE_NAME --format=json > scan-${{ github.run_number }}.json
         jf docker push $IMAGE_LATEST
-        jf docker scan $IMAGE_LATEST --format=json > scan-latest.json
+        #jf docker scan $IMAGE_LATEST --format=json > scan-latest.json
 
     - name: Publish Build info With JFrog CLI
       env:

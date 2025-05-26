@@ -37,11 +37,15 @@ jobs:
 
     - name: Build Tag and push Docker Image
       env:
-        IMAGE_NAME: trialuw7hgr.jfrog.io/homework-docker/jfrog-docker-example-image:${{ github.run_number }}
+        IMAGE_NAME: trialuw7hgr.jfrog.io/homework-docker/spring-petclinic:${{ github.run_number }}
+        IMAGE_LATEST: trialuw7hgr.jfrog.io/homework-docker/spring-petclinic:latest      
       run: |
         jf docker build -t $IMAGE_NAME .
+        jf docker tag $IMAGE_NAME $IMAGE_LATEST
         jf docker push $IMAGE_NAME
-        jf docker scan $IMAGE_NAME --format=json > xray-scan-result.json
+        jf docker scan $IMAGE_NAME --format=json > scan-${{ github.run_number }}.json
+        jf docker push $IMAGE_LATEST
+        jf docker scan $IMAGE_LATEST --format=json > scan-latest.json
 
     - name: Publish Build info With JFrog CLI
       env:

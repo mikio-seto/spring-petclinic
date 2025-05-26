@@ -1,0 +1,28 @@
+name: CI with Maven for compile, test
+
+
+on:
+  push:
+    branches: ["main", "homework/ci-pipeline"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up JDK17
+      uses: actions/setup-java@v3
+      with:
+        jafva-version: '17'
+        distribution: 'temurin'
+
+    - name: Compile
+      run: mvn compile
+
+    - name: Run tests 
+      run: mvn test
+

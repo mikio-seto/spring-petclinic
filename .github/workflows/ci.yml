@@ -26,3 +26,5 @@ jobs:
     - name: Run tests 
       run: mvn test
 
+    - name: Build Docker image using spring-build
+      run: ./mvnw spring-boot:build-image -DskipTests

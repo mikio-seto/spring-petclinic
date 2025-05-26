@@ -8,7 +8,7 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -25,6 +25,9 @@ jobs:
 
     - name: Run tests 
       run: mvn test
+
+    - name: Package
+      run: mvn clean package -DskipTests
 
     - name: Setup JFrog CLI
       uses: jfrog/setup-jfrog-cli@v4

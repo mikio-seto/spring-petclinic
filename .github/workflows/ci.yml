@@ -37,8 +37,8 @@ jobs:
 
     - name: Build Tag and push Docker Image
       env:
-        IMAGE_NAME: trialuw7hgr.jfrog.io/homework-docker/spring-petclinic:${{ github.run_number }}
-        IMAGE_LATEST: trialuw7hgr.jfrog.io/homework-docker/spring-petclinic:latest      
+        IMAGE_NAME: ${{ secrets.JF_REGISTRY }}/${{ secrets.JF_REPOSITORY }}/spring-petclinic:${{ github.run_number }}
+        IMAGE_LATEST: ${{ secrets.JF_REGISTRY }}/${{ secrets.JF_REPOSITORY }}/spring-petclinic:latest      
       run: |
         jf docker build -t $IMAGE_NAME .
         jf docker tag $IMAGE_NAME $IMAGE_LATEST
@@ -50,7 +50,7 @@ jobs:
     - name: Publish Build info With JFrog CLI
       env:
         # Generated and maintained by GitHub
-        JFROG_CLI_BUILD_NAME: jfrog-docker-build-example
+        JFROG_CLI_BUILD_NAME: homework-docker-build
         # JFrog organization secret
         JFROG_CLI_BUILD_NUMBER : ${{ github.run_number }}
       run: |
@@ -60,6 +60,7 @@ jobs:
         # Collect VCS details from git and add them to the build
         jf rt build-add-git
         # Publish build info
-        #jf rt build-publish
+        jf rt build-publish
+        jf xr scan
 
 

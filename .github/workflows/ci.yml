@@ -38,13 +38,13 @@ jobs:
     - name: Setup JFrog CLI
       uses: jfrog/setup-jfrog-cli@v4
       env:
-        JF_URL: ${{ secrets.JF_URL }}
+        JF_URL: ${{ vars.JF_URL }}
         JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
 
     - name: Build Tag and push Docker Image
       env:
-        IMAGE_NAME: ${{ secrets.JF_REGISTRY }}/${{ secrets.JF_REPOSITORY }}/spring-petclinic:${{ github.run_number }}
-        IMAGE_LATEST: ${{ secrets.JF_REGISTRY }}/${{ secrets.JF_REPOSITORY }}/spring-petclinic:latest      
+        IMAGE_NAME: ${{ vars.JF_REGISTRY }}/${{ vars.JF_REPOSITORY }}/${{ vars.JF_DOCKER_IMAGE_NAME }}:${{ github.run_number }}
+        IMAGE_LATEST: ${{ vars.JF_REGISTRY }}/${{ vars.JF_REPOSITORY }}/${{ vars.JF_DOCKER_IMAGE_NAME }}:latest      
       run: |
         jf docker build -t $IMAGE_NAME .
         jf docker tag $IMAGE_NAME $IMAGE_LATEST
@@ -52,7 +52,7 @@ jobs:
         jf docker push $IMAGE_LATEST
         #In case, watchlist not defined
         #jf docker scan $IMAGE_NAME --format=json > scan-${{ github.run_number }}.json
-        #jf docker scan $IMAGE_LATEST --format=json > scan-latest.json
+        jf docker scan $IMAGE_LATEST --format=json > scan-latest.json
 
     - name: Publish Build info With JFrog CLI
       env:

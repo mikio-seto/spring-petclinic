@@ -35,6 +35,28 @@ jobs:
     - name: Package
       run: mvn clean package -DskipTests
 
+    - name: Check GitHub secrets and varriables
+      run: |
+        if [ -z "${{ secrets.JF_ACCESS_TOKEN }}" ]; then
+          echo "JF_ACCESS_TOKEN is not set in GitHub Action secrets. Please confirm Secret and variable section in the repository Settings."
+          exit 1
+        elif [ -z "{{ vars.JF_URL}}" ]; then
+          echo "JF_URL is not set in GitHub Action variables. Please confirm Secret and variable section in the repository Settings."
+          exit 1
+        elif [ -z "{{ vars.JF_REGISTRY}}" ]; then
+          echo "JF_REGISTRY is not set in GitHub Action variables. Please confirm Secret and variable section in the repository Settings."
+          exit 1
+        elif [ -z "{{ vars.JF_REPOSITORY}}" ]; then
+          echo "JF_REPOSITORY is not set in GitHub Action variables. Please confirm Secret and variable section in the repository Settings."
+          exit 1
+        elif [ -z "{{ vars.JF_DOCKER_IMAGE_NAME}}" ]; then
+          echo "JF_DOCKER_IMAGE_NAME is not set in GitHub Action variables. Please confirm Secret and variable section in the repository Settings."
+          exit 1
+        else
+          echo "All requried vars and secrets are set."
+        fi
+
+
     - name: Setup JFrog CLI
       uses: jfrog/setup-jfrog-cli@v4
       env:

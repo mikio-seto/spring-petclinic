@@ -4,6 +4,7 @@ on:
   push:
     branches: 
       - "main"
+      - "homework/ci-pipeline"
       - "features/jfrog-ci-pipeline"
     paths-ignore:
       - "docs/**"

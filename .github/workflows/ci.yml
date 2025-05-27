@@ -1,11 +1,17 @@
 name: CI with Maven for compile, test
 
-
 on:
   push:
-    branches: ["main", "homework/ci-pipeline"]
+    branches: 
+      - "main"
+      - "homework/ci-pipeline"
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
+      - "deliverables/**"
   pull_request:
-    branches: ["main"]
+    branches:
+      - "main"
   workflow_dispatch:
     inputs:
       environment:

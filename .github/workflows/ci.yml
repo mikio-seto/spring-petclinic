@@ -54,6 +54,15 @@ jobs:
         else
           echo "All requried vars and secrets are set."
         fi
+    
+    - uses: jfrog/frogbot@v2
+        with:
+          oidc-provider-name: jfrog-github-oidc
+        env:
+          JF_URL: https://${{ vars.JF_URL }}/
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JF_PROJECT: "alexwang"
+
 
 
     - name: Setup JFrog CLI

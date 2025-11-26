@@ -1,7 +1,14 @@
 name: "Frogbot Scan Pull Request"
 on:
-  pull_request_target:
-    types: [ opened, synchronize ]
+  push:
+    branches: 
+      - "main"
+      - "homework/ci-pipeline"
+      - "features/jfrog-ci-pipeline"
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
+      - "deliverables/**"
   workflow_dispatch:
   
 permissions:

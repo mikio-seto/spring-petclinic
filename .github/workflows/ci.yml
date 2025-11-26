@@ -55,7 +55,8 @@ jobs:
           echo "All requried vars and secrets are set."
         fi
     
-    - uses: jfrog/frogbot@v2
+    - name: frogbot
+      uses: jfrog/frogbot@v2
         with:
           oidc-provider-name: jfrog-github-oidc
         env:

@@ -11,11 +11,6 @@ on:
       - "**.md"
       - "deliverables/**"
   workflow_dispatch:
-    inputs:
-      environment:
-        description: "Placeholder"
-        required: true
-        default: "default"
 
 jobs:
   build-and-push:

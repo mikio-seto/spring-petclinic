@@ -33,7 +33,7 @@ jobs:
 
       - uses: jfrog/frogbot@v2
         with:
-          oidc-provider-name: mikio-seto/spring-petclinic@github
+          oidc-provider-name: oidc-test-mikios/spring-petclinic@github
         env:
           JFROG_CLI_LOG_LEVEL: DEBUG
           # JFrog platform URL
